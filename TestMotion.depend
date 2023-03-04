@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1677942442 source:c:\users\hd\desktop\learnsdl\testmotion\entity.cpp
+	"Entity.hpp"
+	"RenderWindow.hpp"
+
+1677253968 c:\users\hd\desktop\learnsdl\testmotion\entity.hpp
+	<iostream>
+	<SDL.h>
+	<SDL_image.h>
+
+1677936555 source:c:\users\hd\desktop\learnsdl\testmotion\main.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	"RenderWindow.hpp"
+	"Entity.hpp"
+	"Map.hpp"
+
+1677942462 c:\users\hd\desktop\learnsdl\testmotion\renderwindow.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	"Entity.hpp"
+
+1677935892 source:c:\users\hd\desktop\learnsdl\testmotion\renderwindow.cpp
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
+	"RenderWindow.hpp"
+
+1677211965 c:\users\hd\desktop\learnsdl\testmotion\ultis.hpp
+	<SDL.h>
+
+1677936013 source:c:\users\hd\desktop\learnsdl\testmotion\map.cpp
+	"Map.hpp"
+	"Common_Func.hpp"
+	"RenderWindow.hpp"
+
+1677942752 c:\users\hd\desktop\learnsdl\testmotion\map.hpp
+	"RenderWindow.hpp"
+
+1677587436 source:c:\users\hd\desktop\learnsdl\testmotion\common_func.cpp
+	"Common_Func.hpp"
+	"RenderWindow.hpp"
+
+1677587415 c:\users\hd\desktop\learnsdl\testmotion\common_func.hpp
+	"RenderWindow.hpp"
+
