@@ -1,79 +1,52 @@
 #include "Map.hpp"
 #include "Common_Func.hpp"
 #include "RenderWindow.hpp"
+#include <bits/stdc++.h>
 using namespace std;
-int level1[20][25]={
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-    {2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2}
-};
-
-Map::Map()
+void Map::loadMap(const char* file_csv)
 {
+    std::ifstream file(file_csv);
+	for (int i = 0; i < 20; i++) {
+		std::string s;
+		file >> s;
+		std::stringstream ss(s);
+		std::string c;
+		int j = 0;
+		while (getline(ss, c, ',')) {
+			int x = stoi(c);
+			posTileSet[i][j] = x;
+			j++;
+		}
+	}
 
-    dirt= Common_Func::loadTexture("resources/mapTexture/dirt.png");
-    grass = Common_Func::loadTexture("resources/mapTexture/grass.png");
-    water = Common_Func::loadTexture("resources/mapTexture/water.png");
-    loadMap(level1);
-    src.x = src.y=0;
-    src.w= dest.w=32;
-    src.h=dest.h=32;
-
-    dest.x=dest.y=0;
 
 }
-void Map::loadMap(int arr[20][25])
+void Map::loadTileSet(const char* file_tileset)
 {
+    SDL_Surface* tilesetSurface = IMG_Load(file_tileset);
+    tilesetTexture = SDL_CreateTextureFromSurface(RenderWindow::renderer, tilesetSurface);
 
-    for(int  row =0;row <20;row++)
-    {
-        for( int col=0; col <25;col++)
-        {
-            map[row][col]= arr[row][col];
+
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 40; j++) {
+            tileRect = { j * 32, i * 32, 32, 32 };
+            tileset.push_back(tileRect);
         }
     }
 }
 void Map::drawMap()
 {
-    int type=0;
-    for(int  row =0;row <20;row++)
-    {
-        for( int col=0; col <25;col++)
-        {
-            type = map[row][col];
-            dest.x = col * 32;
-            dest.y = row * 32;
-            switch(type)
-            {
-            case 0:
-                Common_Func::draw(water,src,dest);
-                break;
-            case 1:
-                Common_Func::draw(grass,src,dest);
-                break;
-            case 2:
-                Common_Func::draw(dirt,src,dest);
-                break;
-            default:
-                break;
-            }
+    destRect.x=0;
+    destRect.y=0;
+    destRect.w=32;
+    destRect.h=32;
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 40; j++) {
+            tileRect = tileset[posTileSet[i][j]];
+            SDL_RenderCopy(RenderWindow::renderer, tilesetTexture, &tileRect, &destRect);
+            destRect.x += 32;
         }
+    destRect.y += 32;
+    destRect.x = 0;
     }
 }

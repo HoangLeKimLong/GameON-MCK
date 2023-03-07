@@ -1,20 +1,20 @@
 #pragma once
 #include "RenderWindow.hpp"
+#include <bits/stdc++.h>
+const static int map_y=20;
+const static int map_x=40;
 class Map
 {
 public:
-    Map();
-    ~Map();
-    const int map_rows=20;
-    const int map_cols=25;
-    void loadMap(int arr[20][25]);
-    void drawMap();
-    void drawMapbyFile(const char* file_path);
-private:
-    SDL_Rect src,dest;
-    SDL_Texture* dirt;
-    SDL_Texture* grass;
-    SDL_Texture* water;
 
-    int map[20][25];
+
+    void loadMap(const char* file_csv);
+    void loadTileSet(const char* file_tileset);
+    void drawMap();
+    int posTileSet[map_y][map_x];
+    SDL_Texture* tilesetTexture;
+    vector<SDL_Rect> tileset;
+    SDL_Rect tileRect;
+    SDL_Rect destRect;
+
 };

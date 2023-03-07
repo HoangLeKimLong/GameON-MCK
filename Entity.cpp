@@ -1,8 +1,7 @@
 
 #include "Entity.hpp"
 #include "RenderWindow.hpp"
-const int SCRRREN_WIDTH=800;
-const int SCREEN_HEIGHT=600;
+
 
 Entity::Entity()
 {
@@ -38,13 +37,15 @@ void Entity::handleEvent(SDL_Event& event)
         case SDLK_d: velX-=step; break;
         }
     }
+    //
+
 }
 void Entity::move()
 {
     //move left or right
     posX+=velX;
     //If the dot went too far to the left or right
-    if( ( posX < 0 ) || ( posX + PLANE_WIDTH > RenderWindow::SCREEN_WIDTH ) )
+    if( ( posX  < 0 - PLAYER_WIDTH +  200) || ( posX + PLAYER_WIDTH  - 120> RenderWindow::SCREEN_WIDTH  ) )
     {
         //Move back
         posX -= velX;
@@ -52,7 +53,7 @@ void Entity::move()
     //move up or down
     posY+=velY;
     //If the dot went too far to the up or down
-    if( ( posY < 0 )  || (posY + PLANE_HEIGHT >RenderWindow::SCREEN_HEIGHT ) )
+    if( ( posY < 0 - PLAYER_HEIGHT + 170)  || (posY + PLAYER_HEIGHT - 115>RenderWindow::SCREEN_HEIGHT ) )
     {
         //Move back
         posY -= velY;
@@ -66,7 +67,16 @@ void Entity::render(SDL_Texture* tex,SDL_Renderer* renderer)
     SDL_QueryTexture(tex,NULL,NULL,&rect.w,&rect.h);
     rect.x=posX;
     rect.y=posY;
-    rect.w*=1.5;
-    rect.h*=1.3;
+    rect.w=PLAYER_WIDTH;
+
+    rect.h=PLAYER_HEIGHT;
+
     SDL_RenderCopy(renderer,tex,NULL,&rect);
+}
+void Entity::setCurrentFrame(SDL_Rect rect)
+{
+    currentFrame.x=rect.x;
+    currentFrame.y=rect.y;
+    currentFrame.w=rect.w;
+    currentFrame.h=rect.h;
 }

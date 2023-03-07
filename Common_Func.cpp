@@ -1,5 +1,6 @@
 #include "Common_Func.hpp"
 #include "RenderWindow.hpp"
+
 SDL_Texture* Common_Func::loadTexture(const char* file_path)
 {
     SDL_Surface* tmpSurface =IMG_Load(file_path);
