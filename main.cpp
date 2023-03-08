@@ -24,12 +24,12 @@ int main(int argc,char* argv[])
     RenderWindow window("game v1.0",RenderWindow::SCREEN_WIDTH,RenderWindow::SCREEN_HEIGHT);
 
     SDL_Texture* background = window.loadTexture("resources/tank.jpg");
-    SDL_Texture* image =window.loadTexture("resources/tanker/tankD.png");
+    SDL_Texture* image =window.loadTexture("res/tankifD-nobk.png");
     Entity plane;
     plane.tex=image;
 
-    plane.posX=-30;
-    plane.posY=-30;
+    plane.posX=0;
+    plane.posY=0;
 
     Map gamemap;
     gamemap.loadMap("data.csv");

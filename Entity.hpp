@@ -10,8 +10,8 @@ class Entity
 {
 public:
     Entity();
-    const  float PLAYER_WIDTH  = 100 + 220 ;
-    const  float PLAYER_HEIGHT = 100 + 200;
+    const  float PLAYER_WIDTH  = 64 ;
+    const  float PLAYER_HEIGHT = 64;
     float posX,posY,velX,velY;
     const float step=4;
     SDL_Rect currentFrame;

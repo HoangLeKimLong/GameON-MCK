@@ -19,10 +19,17 @@ void Entity::handleEvent(SDL_Event& event)
         //Adjust the velocity
         switch(event.key.keysym.sym)
         {
-        case SDLK_w: velY-=step; break;
-        case SDLK_s: velY+=step; break;
-        case SDLK_a: velX-=step; break;
-        case SDLK_d: velX+=step; break;
+        case SDLK_w: velY-=step;
+
+                    break;
+        case SDLK_s: velY+=step;
+
+                    break;
+        case SDLK_a: velX-=step;
+                    break;
+        case SDLK_d: velX+=step;
+
+                    break;
         }
 
     }
@@ -44,8 +51,8 @@ void Entity::move()
 {
     //move left or right
     posX+=velX;
-    //If the dot went too far to the left or right
-    if( ( posX  < 0 - PLAYER_WIDTH +  200) || ( posX + PLAYER_WIDTH  - 120> RenderWindow::SCREEN_WIDTH  ) )
+    //If the dot went too far to the right or left
+    if( ( posX  < 0 - 30 ) || ( posX + PLAYER_WIDTH  + 30  > RenderWindow::SCREEN_WIDTH  ) )
     {
         //Move back
         posX -= velX;
@@ -53,7 +60,7 @@ void Entity::move()
     //move up or down
     posY+=velY;
     //If the dot went too far to the up or down
-    if( ( posY < 0 - PLAYER_HEIGHT + 170)  || (posY + PLAYER_HEIGHT - 115>RenderWindow::SCREEN_HEIGHT ) )
+    if( ( posY < 0 - 30 )  || (posY + PLAYER_HEIGHT  + 15 > RenderWindow::SCREEN_HEIGHT ) )
     {
         //Move back
         posY -= velY;
@@ -67,9 +74,9 @@ void Entity::render(SDL_Texture* tex,SDL_Renderer* renderer)
     SDL_QueryTexture(tex,NULL,NULL,&rect.w,&rect.h);
     rect.x=posX;
     rect.y=posY;
-    rect.w=PLAYER_WIDTH;
+    rect.w=PLAYER_WIDTH*2;
 
-    rect.h=PLAYER_HEIGHT;
+    rect.h=PLAYER_HEIGHT*2;
 
     SDL_RenderCopy(renderer,tex,NULL,&rect);
 }
