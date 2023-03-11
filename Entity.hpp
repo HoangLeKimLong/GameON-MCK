@@ -5,7 +5,12 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "Map.hpp"
 using namespace std;
+
+
+class Map;
+
 class Entity
 {
 public:
@@ -19,6 +24,6 @@ public:
     void handleEvent(SDL_Event& event);
     void move();
     void render(SDL_Texture* tex,SDL_Renderer* renderer);
-    void setCurrentFrame(SDL_Rect src);
+    void change(Map& gamemap,SDL_Event& event);
 };
 #endif // ENITY_

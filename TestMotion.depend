@@ -59,16 +59,18 @@
 	<iostream>
 	"Entity.hpp"
 
-1678251402 c:\users\hd\desktop\learnsdl\learngit\testmotion\entity.hpp
+1678529502 c:\users\hd\desktop\learnsdl\learngit\testmotion\entity.hpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
+	"Map.hpp"
 
-1678288748 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\entity.cpp
+1678529502 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\entity.cpp
 	"Entity.hpp"
 	"RenderWindow.hpp"
+	"Common_Func.hpp"
 
-1678288234 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\main.cpp
+1678529502 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\main.cpp
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
@@ -76,11 +78,12 @@
 	"Entity.hpp"
 	"Map.hpp"
 
-1678178298 c:\users\hd\desktop\learnsdl\learngit\testmotion\map.hpp
+1678529502 c:\users\hd\desktop\learnsdl\learngit\testmotion\map.hpp
 	"RenderWindow.hpp"
+	"Entity.hpp"
 	<bits/stdc++.h>
 
-1678200783 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\map.cpp
+1678529502 source:c:\users\hd\desktop\learnsdl\learngit\testmotion\map.cpp
 	"Map.hpp"
 	"Common_Func.hpp"
 	"RenderWindow.hpp"

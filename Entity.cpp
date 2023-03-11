@@ -1,7 +1,7 @@
 
 #include "Entity.hpp"
 #include "RenderWindow.hpp"
-
+#include "Common_Func.hpp"
 
 Entity::Entity()
 {
@@ -20,15 +20,16 @@ void Entity::handleEvent(SDL_Event& event)
         switch(event.key.keysym.sym)
         {
         case SDLK_w: velY-=step;
-
+                    tex=Common_Func::loadTexture("res/tankifW-nobk.png");
                     break;
         case SDLK_s: velY+=step;
-
+                    tex=Common_Func::loadTexture("res/tankifS-nobk .png");
                     break;
         case SDLK_a: velX-=step;
+                    tex=Common_Func::loadTexture("res/tankifA-nobk.png");
                     break;
         case SDLK_d: velX+=step;
-
+                    tex=Common_Func::loadTexture("res/tankifD-nobk.png");
                     break;
         }
 
@@ -80,10 +81,8 @@ void Entity::render(SDL_Texture* tex,SDL_Renderer* renderer)
 
     SDL_RenderCopy(renderer,tex,NULL,&rect);
 }
-void Entity::setCurrentFrame(SDL_Rect rect)
+void Entity::change(Map& gamemap,SDL_Event& event)
 {
-    currentFrame.x=rect.x;
-    currentFrame.y=rect.y;
-    currentFrame.w=rect.w;
-    currentFrame.h=rect.h;
+    if( 1+2 >= 3)
+    cout<<gamemap.posTileSet[0][0];
 }

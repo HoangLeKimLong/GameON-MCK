@@ -25,15 +25,15 @@ int main(int argc,char* argv[])
 
     SDL_Texture* background = window.loadTexture("resources/tank.jpg");
     SDL_Texture* image =window.loadTexture("res/tankifD-nobk.png");
-    Entity plane;
-    plane.tex=image;
+    Entity player;
+    player.tex=image;
 
-    plane.posX=0;
-    plane.posY=0;
+    player.posX=0;
+    player.posY=0;
 
     Map gamemap;
-    gamemap.loadMap("data.csv");
-    gamemap.loadTileSet("tileset.png");
+    gamemap.loadMap("maplv1data.csv");
+    gamemap.loadTileSet("Level1.png");
     bool gameRunning=true;
     while(gameRunning)
     {
@@ -51,16 +51,16 @@ int main(int argc,char* argv[])
 						gameRunning=false;
 					}
 
-					//Handle input for the dot
-					plane.handleEvent(event);
+					//Handle input for player
+                    player.handleEvent(event);
         }
-
+        player.change(gamemap,event);
         gamemap.drawMap();
-        plane.move();
+        player.move();
 
 
 
-        plane.render(plane.tex,window.renderer);
+        player.render(player.tex,window.renderer);
 
         frameTime =SDL_GetTicks() - frameStart;
 
@@ -69,6 +69,7 @@ int main(int argc,char* argv[])
         {
             SDL_Delay(frameDelay - frameTime);
         }
+        SDL_SetRenderDrawColor(RenderWindow::renderer, 0, 0, 128, 255);
         window.display();
         window.clear();
 
