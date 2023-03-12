@@ -47,9 +47,12 @@ void Entity::handleEvent(SDL_Event& event)
     }
     //
 
+
 }
-void Entity::move()
+void Entity::move(Map& gamemap)
 {
+    lastPosX=posX;
+    lastPosY=posY;
     //move left or right
     posX+=velX;
     //If the dot went too far to the right or left
@@ -67,7 +70,14 @@ void Entity::move()
         posY -= velY;
     }
 
+    if(checkCollision(gamemap))
+       {
+            posX=lastPosX;
+            posY=lastPosY;
+        }
 
+
+    cout<<posX<<" "<<posY<<endl;
 }
 void Entity::render(SDL_Texture* tex,SDL_Renderer* renderer)
 {
@@ -81,8 +91,20 @@ void Entity::render(SDL_Texture* tex,SDL_Renderer* renderer)
 
     SDL_RenderCopy(renderer,tex,NULL,&rect);
 }
-void Entity::change(Map& gamemap,SDL_Event& event)
+bool Entity::checkCollision(Map& gamemap)
 {
-    if( 1+2 >= 3)
-    cout<<gamemap.posTileSet[0][0];
+    // Tính toán vị trí của nhân vật trên TileMap
+    int leftTile = (posX +10 ) / TILE_SIZE;
+    int rightTile = (posX + PLAYER_WIDTH + 20) / TILE_SIZE;
+    int topTile =   (posY + 10 )/ TILE_SIZE;
+    int bottomTile =(posY + PLAYER_HEIGHT + 20) / TILE_SIZE;
+     // Kiểm tra xem nhân vật có đang va chạm với một ô vuông trên TileMap không
+    for (int i = topTile + 1; i <= bottomTile; i++) {
+        for (int j = leftTile + 1; j <= rightTile; j++) {
+            if (gamemap.posTileSet[i][j] != BLANK_TILE) {
+                return true; // Nếu có va chạm thì trả về true
+            }
+        }
+    }
+    return false;
 }

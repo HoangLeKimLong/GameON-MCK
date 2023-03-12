@@ -32,7 +32,7 @@ int main(int argc,char* argv[])
     player.posY=0;
 
     Map gamemap;
-    gamemap.loadMap("maplv1data.csv");
+    gamemap.loadMap("newmaplv1data.csv");
     gamemap.loadTileSet("Level1.png");
     bool gameRunning=true;
     while(gameRunning)
@@ -54,9 +54,9 @@ int main(int argc,char* argv[])
 					//Handle input for player
                     player.handleEvent(event);
         }
-        player.change(gamemap,event);
+       // player.checkCollision(gamemap);
         gamemap.drawMap();
-        player.move();
+        player.move(gamemap);
 
 
 

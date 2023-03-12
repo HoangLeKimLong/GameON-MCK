@@ -17,13 +17,14 @@ public:
     Entity();
     const  float PLAYER_WIDTH  = 64 ;
     const  float PLAYER_HEIGHT = 64;
-    float posX,posY,velX,velY;
-    const float step=4;
+    int posX,posY,velX,velY;
+    int lastPosX,lastPosY;
+    const int step=4;
     SDL_Rect currentFrame;
     SDL_Texture* tex;
     void handleEvent(SDL_Event& event);
-    void move();
+    void move(Map& gamemap);
     void render(SDL_Texture* tex,SDL_Renderer* renderer);
-    void change(Map& gamemap,SDL_Event& event);
+    bool checkCollision(Map& gamemap);
 };
 #endif // ENITY_
